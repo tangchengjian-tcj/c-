@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-int main()
+int a()
 {
 	int sum = 0, value = 0;
 	int currVal = 0, val = 0;

@@ -13,6 +13,6 @@ int ds()
 	std::cout << vl + v2;
 	std::cout << vl * v2;
 	std::cout << "The sum of " << vl << " and " << v2 << " is " << vl + v2 << std::endl; 
-	sd();
+	/*sd();*/
 	return 0;
 }
