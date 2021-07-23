@@ -1,8 +1,6 @@
 ### c++的学习路线
 * c++实习总结--牛客
   * https://www.nowcoder.com/discuss/637559
-* c++各企业招聘职位
-  * ![image](https://github.com/tangchengjian-tcj/c-/blob/master/%E5%9B%BE%E7%89%87/c%2B%2B%E8%81%8C%E4%BD%8D.jpg)
 * c++书籍总和
   * https://github.com/imarvinle/awesome-cs-books#c 
 ### 第一部分
@@ -14,7 +12,10 @@
    * 计算机网络，自上而下
   * 操作系统
    * 深入理解操作系统  
+  * 设计模式
+   * 大话设计模式
   * linux服务
+   * linux就该这么学（书籍）
    * unix环境高级编程
    * linux高性能服务器编程 
    * Linux多线程服务器端编程
