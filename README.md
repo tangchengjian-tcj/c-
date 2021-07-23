@@ -1,6 +1,7 @@
 ### c++的学习路线
 * c++实习总结--牛客
   * https://www.nowcoder.com/discuss/637559
+  * https://www.zhihu.com/question/400543720/answer/1575902902 ----知乎
 * c++书籍总和
   * https://github.com/imarvinle/awesome-cs-books#c 
 ### 第一部分
