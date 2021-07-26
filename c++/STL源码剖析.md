@@ -89,4 +89,28 @@
     * STL标准头文件(无拓展名)，例如vector,deque,list。。。
     * c++standard定案前，HP所规范的STL头文件，例如，vector.h,deque.h
     * SGI STL内部文件（STL真正实现于此)，例如，stl_vector.h,stl_deque.h....
+
+### 空间配置器
+  ### SGI STL配置器简介
+   * SGI STL的配置器与众不同，也与标准规范不同，其名称是 alloc 而非 allocator ,而且不接受任何参数。如果要在程序中明确使用SGI配置器，那么应该这样写：
+      
+       ···
+
+         vector<int,std::alloc> iv; //而不是vector<int,std::allocator<int> > iv;
+
+       ···
+   * 标准配置器的名字是allocator，而且可以接受参数。SGI STL的每一个容器都已经指定了缺省配置器：alloc。我们很少需要自己去指定空间配置器。比如vector容器的声明：
+       ···
+       
+             template <class T, class Alloc = alloc>  // 预设使用alloc为配置器
+             class vector {
+             //...
+             }
+             
+       ···
+       
+   * 其实SGI也定义了一个符合部分标准，名为allocator的配置器，但是它自己不使用，也不建议我们使用，主要原因是效率不佳。它只是把C++的操作符::operator new和::operator delete做了一层简单的封装而已，可以用但是不建议我们使用。
+
+
+
 * 
