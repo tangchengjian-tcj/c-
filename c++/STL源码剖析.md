@@ -94,11 +94,9 @@
   ### SGI STL配置器简介
    * SGI STL的配置器与众不同，也与标准规范不同，其名称是 alloc 而非 allocator ,而且不接受任何参数。如果要在程序中明确使用SGI配置器，那么应该这样写：
       
-       ···
 
          vector<int,std::alloc> iv; //而不是vector<int,std::allocator<int> > iv;
 
-       ···
    * 标准配置器的名字是allocator，而且可以接受参数。SGI STL的每一个容器都已经指定了缺省配置器：alloc。我们很少需要自己去指定空间配置器。比如vector容器的声明：
        ···
        
@@ -107,10 +105,23 @@
              //...
              }
              
-       ···
-       
    * 其实SGI也定义了一个符合部分标准，名为allocator的配置器，但是它自己不使用，也不建议我们使用，主要原因是效率不佳。它只是把C++的操作符::operator new和::operator delete做了一层简单的封装而已，可以用但是不建议我们使用。
 
-
-
-* 
+ ### SGI特殊的空间配置器alloc
+  
+   我们所习惯的c++内存配置操作和释放操作如下：
+   
+           class Foo { ... };
+           Foo* pf = new Foo; // 配置内存，然后构造对象
+           delete pf; // 将对象析构，然后释放内存
+    
+   这其中的new操作符（new operator）包含两阶段操作
+   
+      * （1）调用operator new 配置内存
+      * （2）调用FOO::FOO（）构造函数构造对象内容
+      
+   这其中的delete操作符也包含两阶段操作
+   
+      * （1）调用Foo::~Foo( )析构函数将对象析构。
+      * （2）调用operator delete释放内存
+    
