@@ -105,8 +105,8 @@
   
   ```
   
-  ### https://wendeng.github.io/2019/05/13/c++%E5%9F%BA%E7%A1%80/%E3%80%8ASTL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E3%80%8B%E7%AC%AC2%E7%AB%A0%20%E7%A9%BA%E9%97%B4%E9%85%8D%E7%BD%AE%E5%99%A8/
-  ### SGI STL配置器简介
+   ### https://wendeng.github.io/2019/05/13/c++%E5%9F%BA%E7%A1%80/%E3%80%8ASTL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E3%80%8B%E7%AC%AC2%E7%AB%A0%20%E7%A9%BA%E9%97%B4%E9%85%8D%E7%BD%AE%E5%99%A8/
+   ### SGI STL配置器简介
    * SGI STL的配置器与众不同，也与标准规范不同，其名称是 alloc 而非 allocator ,而且不接受任何参数。如果要在程序中明确使用SGI配置器，那么应该这样写：
       
 
@@ -122,7 +122,7 @@
              
    * 其实SGI也定义了一个符合部分标准，名为allocator的配置器，但是它自己不使用，也不建议我们使用，主要原因是效率不佳。它只是把C++的操作符::operator new和::operator delete做了一层简单的封装而已，可以用但是不建议我们使用。
 
- ### SGI特殊的空间配置器alloc
+  ### SGI特殊的空间配置器alloc
   
    我们所习惯的c++内存配置操作和释放操作如下：
    
@@ -140,3 +140,5 @@
       * （1）调用Foo::~Foo( )析构函数将对象析构。
       * （2）调用operator delete释放内存
     
+    
+### 迭代器
