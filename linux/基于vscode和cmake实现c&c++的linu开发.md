@@ -1,3 +1,10 @@
+讲义：
+  * gcc编译器：https://mp.weixin.qq.com/s/UKz0XjFejT3eINgie_sc3w
+  * GDB调试器：https://mp.weixin.qq.com/s/3uibMHewV-zGGAczlJq-pQ
+  * vscode:https://mp.weixin.qq.com/s/Y1z4Og-BUluqTGMAM7DHhA
+  * cmake：https://mp.weixin.qq.com/s/nmjQIezDb44a089YMQvNyw
+  * 实战：https://mp.weixin.qq.com/s/Clq_DPLry9yijZPiCiVUXg
+
 ## 开发环境安装
   * 安装gcc,g++ gdb：sudo apt install bulid-essential gdb
   * 安装cmake:sudo apt install cmake
