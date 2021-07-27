@@ -38,8 +38,15 @@
         -O3 则包括循环展开和其他一些与处理特性相关的优化工作。
         选项将使编译的速度比使用 -O 时慢， 但通常产生的代码执行速度会更快。
         如：
-        [root@localhost test]# gcc test.c -O3
-        [root@localhost test]# gcc -O3 test.c
-        [root@localhost test]# gcc -o tt test.c -O2
-        [root@localhost test]# gcc -O2 -o tt test.c
-  * 
+          [root@localhost test]# gcc test.c -O3
+          [root@localhost test]# gcc -O3 test.c
+          [root@localhost test]# gcc -o tt test.c -O2
+          [root@localhost test]# gcc -O2 -o tt test.c
+  * -l和-L  -l参数就是用来指定程序要链接的库，-l参数紧接着就是库名，那么库名跟真正的库文件名有什么关系呢？ 就拿数学库来说，他的库名是m，他的库文件名是libm.so，很容易看出，把库文件名的头lib和尾.so去掉就是库名
+    * g++ -L/home/bing/mytestibfloder -lmytest test.cpp 
+  * -I ：指定文件搜索目录
+  * -Wall ：打印警告信息
+  * -w:关闭警告信息
+  * -std=c++11 设置编译标准
+  * -o 指定输出文件名
+  * -D：定义宏 
