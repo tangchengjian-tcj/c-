@@ -68,7 +68,7 @@
       * 4.从函数形式可以看到,它与运算符重载函数相似,都是用关键字operator开头,只是被重载的是类型名｡double类型经过重载后,除了原有的含义外,还获得新的含义(将一个Complex类对象转换为double类型数据,并指定了转换方法)｡这样, 编译系统不仅能识别原有的double型数据,而且还会把Complex类对象作为double型数据处理｡
 
 ####  源码剖析
-### STL概论
+## STL概论
   STL六大组件
   
 
@@ -90,7 +90,7 @@
     * c++standard定案前，HP所规范的STL头文件，例如，vector.h,deque.h
     * SGI STL内部文件（STL真正实现于此)，例如，stl_vector.h,stl_deque.h....
 
-### 空间配置器
+## 空间配置器
 
    ```
     
@@ -141,4 +141,4 @@
       * （2）调用operator delete释放内存
     
     
-### 迭代器
+## 迭代器
