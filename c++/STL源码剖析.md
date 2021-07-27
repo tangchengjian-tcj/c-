@@ -91,6 +91,20 @@
     * SGI STL内部文件（STL真正实现于此)，例如，stl_vector.h,stl_deque.h....
 
 ### 空间配置器
+
+   ```
+    
+    首先介绍了SGI STL的配置器alloc,然后介绍构造内存alloc::allocate() 和分配对象 ::construct() ，释放内存alloc::deallocate()和解析对象::destroy()  ,并介绍函数中内容
+    其中对于内存的创建和释放，采用了双层配置器机制
+    双层配置器机制：
+        第一级配置器直接使用malloc(),free(),realloc()等C函数执行实际的内存配置、释放、重配置操作，并实现出类似C++ new handler机制（意思是可以要求系统在配置需求无法被满足时，调用一个你所指定的函数，这里之所以说类似是因为SGI没有new operator，不能直接使用对应的handler）。
+         第二层配置器：
+                如果要分配的区块大于128bytes，则移交给第一级配置器处理。
+                如果要分配的区块小于128bytes，则以内存池管理（memory pool），又称之次层配置）：每次配置一大块内存，并维护对应的自由链表（free-list）。下次若有相同大小的内存需求，则直接从free-list中取。如果有小额区块被释放，则由配置器回收到free-list中。
+
+  
+  ```
+  
   ### https://wendeng.github.io/2019/05/13/c++%E5%9F%BA%E7%A1%80/%E3%80%8ASTL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E3%80%8B%E7%AC%AC2%E7%AB%A0%20%E7%A9%BA%E9%97%B4%E9%85%8D%E7%BD%AE%E5%99%A8/
   ### SGI STL配置器简介
    * SGI STL的配置器与众不同，也与标准规范不同，其名称是 alloc 而非 allocator ,而且不接受任何参数。如果要在程序中明确使用SGI配置器，那么应该这样写：
