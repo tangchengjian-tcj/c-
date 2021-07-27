@@ -1,4 +1,5 @@
 讲义：
+  * linux系统介绍：https://mp.weixin.qq.com/s/cFZ9DJCROF51c6xbYXaYaA 
   * gcc编译器：https://mp.weixin.qq.com/s/UKz0XjFejT3eINgie_sc3w
   * GDB调试器：https://mp.weixin.qq.com/s/3uibMHewV-zGGAczlJq-pQ
   * vscode:https://mp.weixin.qq.com/s/Y1z4Og-BUluqTGMAM7DHhA
