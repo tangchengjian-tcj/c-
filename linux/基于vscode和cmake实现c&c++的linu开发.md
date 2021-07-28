@@ -71,6 +71,12 @@
    
    调试开始：执行 **gdb [exefilename] ** ，进入到gdb调试程序，其中exefilename为要调试的可执行文件名
    
+   
+   编译程序时需要加上-g，之后才能用gdb进行调试：gcc -g main.c -o main
+   
+   
+   回车键：重复上一命令
+   
           ## 以下命令后括号内为命令的简化使用，比如run（r），直接输入命令 r 就代表命令run
           $(gdb)help(h)        # 查看命令帮助，具体命令查询在gdb中输入help + 命令 
           $(gdb)run(r)         # 重新开始运行文件（run-text：加载文本文件，run-bin：加载二进制文件）
