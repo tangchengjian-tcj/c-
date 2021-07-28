@@ -167,5 +167,11 @@
                typename iterator_traits<Iterator>::value_type func(Iterator iter){return *iter;}
 
            ···
-           
+   
+   * 迭代器相应类型
+     *  1.value_type:指的是迭代器所指对象的型别
+     *  2.difference_type：用来表示两个迭代器之间的距离
+     *  3.refrence_type：指迭代器所指对象的类型的引用
+     *  4.pointer_type：相应的指针类型
+     *  5.iterator_category：标识迭代器的移动特性和可以对迭代器执行的操作
            
