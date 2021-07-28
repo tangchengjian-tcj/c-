@@ -151,3 +151,21 @@
   * 利用function template的参数推导机制
   * partial specialization（偏特化）的意义  
     *  便特化的目的主要是为了防止传递过来的时候不是一个迭代器而是一个原生指针
+  *  偏特化的简介：
+    *   如果class template拥有一个以上的tempate参数，提供另一份template定义式，而本身仍为templatized
+    *   针对（任何）template参数更进一步的条件限制所设计的一个特化版本。
+    *   下面的class template 专门用来“萃取”迭代器的特性
+          
+          ···
+               
+               即保证了无论是原指针（func(int *)）还是迭代器iterator都可以进行执行
+              template <class I>
+              struct iterator_traits{
+                   typedef typename I ::value_type value_type;
+               }
+               template<class Iterator>
+               typename iterator_traits<Iterator>::value_type func(Iterator iter){return *iter;}
+
+           ···
+           
+           
