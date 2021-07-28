@@ -104,3 +104,38 @@
          $(gdb)x                            # 查看内存x/20xw 显示20个单元，16进制，4字节每单元
          $(gdb)run argv[1] argv[2]          # 调试时命令行传参
          $(gdb)set follow-fork-mode child   # Makefile项目管理：选择跟踪父子进程（fork()）
+         
+         
+         
+         
+         
+         
+## cmake
+ 
+ 简介：
+   
+   * CMake是一个跨平台的安装编译工具，可以用简单的语句来描述所有平台的安装(编译过程)。
+  
+  
+ 语法特性：
+      
+   * 基本格式：指令（参数1 参数2）
+     *  参数之间用空格或者分号分开，参数用括弧括起来
+     *  指令的大小写是无关的，参数和变量大小写是相关的
+     *  变量使用${}方式取值，但是在IF控制语句中直接使用变量名
+
+   * 重要指令和cmake常用变量
+     * cmake_minimum_required - 指定CMake的最小版本要求 
+       * 语法：cmake_minimum_required(VERSION versionNumber [FATAL_ERROR])
+       * cmake_minimum_required(VERSION 2.8.3)
+     * project - 定义工程名称，并可指定工程支持的语言  
+       * project(HELLOWORLD)
+       * project(projectname [CXX] [C] [Java])
+     * set - 显式的定义变量  
+       * set(SRC sayhello.cpp hello.cpp)
+       * set(VAR [VALUE] [CACHE TYPE DOCSTRING [FORCE]])
+     * include_directories - 向工程添加多个特定的头文件搜索路径  --->相当于指定g++编译器的-I参数
+       * include_directories(/usr/include/myincludefolder ./include)
+       * include_directories([AFTER|BEFORE] [SYSTEM] dir1 dir2 …)
+     * 相关内容看链接
+  
