@@ -151,3 +151,12 @@
   * 士兵可以装填子弹
   * 枪可以发射子弹
   * 枪可以装填子弹--添加子弹数量
+ 
+ 
+ 配置文件修改
+ 
+ * 修改launch.json设置debug
+   * 将launch.json中的program的内容改为当前项目的可执行文件路径
+   * 然后F5进行debug
+ * 修改task.json中的内容进行（修改内容不用重新make也可直接进行debugg）
+   * 将preLaunchTask中的内容改为task.json中的label 
