@@ -138,4 +138,16 @@
        * include_directories(/usr/include/myincludefolder ./include)
        * include_directories([AFTER|BEFORE] [SYSTEM] dir1 dir2 …)
      * 相关内容看链接
-  
+
+
+
+##  实战_完整项目开发
+ 
+ 案例
+ 
+ * 需求
+  * 士兵许三多有一把抢，叫做ak47
+  * 士兵可以开火
+  * 士兵可以装填子弹
+  * 枪可以发射子弹
+  * 枪可以装填子弹--添加子弹数量
