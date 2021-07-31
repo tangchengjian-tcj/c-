@@ -1,9 +1,3 @@
-* 空间配置器 https://wendeng.github.io/2019/05/13/c++%E5%9F%BA%E7%A1%80/%E3%80%8ASTL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E3%80%8B%E7%AC%AC2%E7%AB%A0%20%E7%A9%BA%E9%97%B4%E9%85%8D%E7%BD%AE%E5%99%A8/
-* 迭代器和traits编程  https://wendeng.github.io/2019/05/15/c++%E5%9F%BA%E7%A1%80/%E3%80%8ASTL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E3%80%8B%E7%AC%AC3%E7%AB%A0%20%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8Etraits%E7%BC%96%E7%A8%8B%E6%8A%80%E6%B3%95/
-* 序列式容器   https://wendeng.github.io/2019/05/15/c++%E5%9F%BA%E7%A1%80/%E3%80%8ASTL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E3%80%8B%E7%AC%AC3%E7%AB%A0%20%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8Etraits%E7%BC%96%E7%A8%8B%E6%8A%80%E6%B3%95/
-* 关联式容器    https://wendeng.github.io/2019/05/18/c++%E5%9F%BA%E7%A1%80/%E3%80%8ASTL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E3%80%8B%E7%AC%AC5%E7%AB%A0%20%E5%85%B3%E8%81%94%E5%BC%8F%E5%AE%B9%E5%99%A8/
-* 算法   https://wendeng.github.io/2019/05/20/c++%E5%9F%BA%E7%A1%80/%E3%80%8ASTL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E3%80%8B%E7%AC%AC6%E7%AB%A0%20%E7%AE%97%E6%B3%95/
-
 #### 基础知识补充
 ### 转换构造函数和隐士转换函数
   * 转换构造函数
@@ -183,4 +177,31 @@
 
 
 ## 序列式容器
+ * 简介：所谓序列式容器，其中元素都可有序，但未必有序
  
+ 序列式容器简介
+ 
+ * vector容器
+   * vector的实现技术，关键在于其对大小的控制以及重新配置时的数据移动效率  
+   * vector的空间配置策略是：
+     * 当插入元素的时候，如果配置的空间不足，则扩充空间到当前的两倍，如果仍然不足则扩充到所需的空间
+     * 空间的扩张必须经历“重新配置，元素移动，释放原空间的副哦从”  
+* list容器
+  * list是一个环状双向链表，list不能以原生指针作为迭代器，需要定义特定的iterator类
+* deque容器
+  * deque与vector容器的差异
+    * 一是在于deque允许常数时间内对头端进行元素的插入或移除操作
+    * 二是在于deque没有所谓的容量概念，因为它是动态的以分段连续空间组合而成，随时可以增加一段新的空间并连接起来。
+  * deque采用的是一种分段连续空间存储结构，采用一个mao来管理这些空间段，这里所谓map是一小块连续空间，其中每个元素哦都市指针，指向另外一段较大的连续线性空间，成为缓冲区，缓冲区才是deque的存储空间主体，SGI STL允许我们指定缓冲区大小，默认值0表示使用512bytes缓冲区。
+* stack容器
+  * 是一种先进后出的数据结构，只有一个出口
+  * stack没有迭代器
+* queue容器
+  * 是一种先进先出的数据结构，有两个出口
+  * 没有迭代器
+* heap（堆）
+  * heap并不属于STL容器组件，扮演priority queue的助手，主要分为max heap 和min heap,在缺省的情况下，max heap是priority queue的底层实现机制
+  * 以array表达tree的方法，这样可以使用一个array表示出一颗完全二叉树。array的缺点是无法动态改变大小，所以实际实现机制中的max heap实际上以一个vector表现的完全二叉树
+  * heap没有迭代器     
+* slist是一个单向链表
+  * 迭代器属于单向的Forward iterator   
