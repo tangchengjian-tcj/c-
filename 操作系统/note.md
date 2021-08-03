@@ -51,3 +51,4 @@
   * int execvp(const char *file, char *const argv[]);
   * int execvpe(const char *file, char *const argv[], char *const envp[]);
 
+   ！[exec的用法](https://github.com/tangchengjian-tcj/c-/blob/master/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%9B%BE%E7%89%87/exec.jpg)
