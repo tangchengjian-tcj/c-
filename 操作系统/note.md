@@ -52,3 +52,6 @@
   * int execvpe(const char *file, char *const argv[], char *const envp[]);
 
    ！[exec的用法](https://github.com/tangchengjian-tcj/c-/blob/master/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%9B%BE%E7%89%87/exec.jpg)
+
+* 孤儿进程：父亲死了，子进程被init进程领养,负责回收进程
+* 僵尸进程：子进程死了，父进程没有回收子进程的资源
