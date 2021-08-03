@@ -42,4 +42,12 @@
       * 进程ID，frok返回值，进程运行时间，定时器，未决信号集   
       * 父子进程之间遵循读时共享，写时复制的原则。
 * exec函数族
-  *  
+  *  fork创建子进程之后执行的是和父进程相同的程序(但可能执行不同的代码分支)，子进程往往要调用exec函数以执行另一种程序，当进程调用一种exec函数时，改进程的用户空间代码和数据完全被新程序替换，从新程序的启动例程开始执行，调用exec并不创建新进程，所以调用exec前后进程的id并未改变
+  *  int execl(const char *path, const char *arg, ... /* (char  *) NULL */);
+      * 执行程序的时候，使用PATH环境变量，执行的程序时候可以不加用路径  
+  * int execlp(const char *file, const char *arg, ... /* (char  *) NULL */);
+  * int execle(const char *path, const char *arg, .../*, (char *) NULL, char * const envp[] */);
+  * int execv(const char *path, char *const argv[]);
+  * int execvp(const char *file, char *const argv[]);
+  * int execvpe(const char *file, char *const argv[], char *const envp[]);
+
