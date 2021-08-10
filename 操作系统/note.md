@@ -119,6 +119,90 @@
       * offset：映射文件的偏移（4k的整数倍） 
    *  int munmap(void *addr, size_t length);释放映射空间：成功10，失败-1
 * 信号
+   * 信号的特点：简单，不能携带大量信息
+   * 信号的机制：每个进程收到的所有信号，都是内核负责发送的
+   * 递达：递送并且达到进程
+   * 未决：产生和递达之间的状态，主要是由于阻塞（屏蔽）导致该状态
+   * 信号处理方式：
+      * 执行默认动作
+      * 忽略（丢弃）
+      * 捕获（调用用户处理函数） 
+   * 信号四要素：
+      * 编号
+      * 事件
+      * 名称
+      * 默认处理动作   (man 7 signal:命令查看)
+   * 阻塞信号集和未决信号集：
+      * 阻塞信号集：将某些信号加入集合，对他们设置屏蔽，当屏蔽x信号后，该信号的处理将推后（解除屏蔽后）
+      * 未决信号集：
+         * 1。信号产生，未决信号集中描述该信号的位立刻翻转为1，表信号处于未决状态，当信号被处理对应位翻转为0,这一时刻往往非常短暂
+         * 2，信号产生后，由于某些原因（主要是阻塞）不能抵达，这类信号的集合称为未决信号集，屏蔽解除前，信号一直处于未决状态  
+   * 函数
+      *  int kill(pid_t pid, int sig); 成功：0  失败：-1
+         * pid>0：指定进程
+         * pid=0：发送信号给与调用kill函数进程属于同一进程组的所有进程
+         * pid<0：取 |pid|发给对应进程组
+         * pid=-1：发送给进程有权限发送的系统中的所有进程
+         * sig对应的信号，应该使用宏名
+      * raise：给自己发送信号
+      * int raise(int sig);
+      * abort();直接杀掉自己
+      * 时钟信号:unsigned int alarm(unsigned int seconds);
+         * 返回值：返回0或者剩余的秒数，无失败 
+         * 传入秒数，时间到后，会给当前进程发送14（SIGALRM）信号
+      * int setitimer(int which, const struct itimerval *new_value,struct itimerval *old_value);
+      * 参数：
+         * which :指定定时方式
+         * 1。自然定时：ITIMER_REAL  ----> 14（SIGLARM）  计算自然时间
+         * 2。虚拟空间计时（用户空间）ITIMER_VIRTUAL----》26（SIGVTALRM）计算进程占用cpu时间
+         * 3。运行时计时（用户+内核）ITIMER_PROF----》27（SIGPROF）计算占用cpu及执行系统调用的时间   
+   
+               
+               new_value:要设置的闹钟时间
+               old_value:传出的是上一个时钟的时间
+                struct itimerval {
+                     struct timeval it_interval; /* Interval for periodic timer */  周期性的时间设置
+                     struct timeval it_value;    /* Time until next expiration */ 下次的闹钟时间
+                 };
+
+                 struct timeval {
+                     time_t      tv_sec;         /* seconds */  秒
+                     suseconds_t tv_usec;        /* microseconds */  微秒
+                 };
+        
+   * 信号操作函数
+      * 内核通过读取未决信号集来判断信号是否应被处理，信号屏蔽字mask可以影响未决信号集，而我们可以在应用程序中自定义set来改变mask，以达到屏蔽指定信号的目的
+      * 信号集设定：
+         
+               int sigemptyset(sigset_t *set); 将某个信号集清0
+               int sigfillset(sigset_t *set);将某个信号集置1
+               int sigaddset(sigset_t *set, int signum);将某个信号集加入信号集
+               int sigdelset(sigset_t *set, int signum);将某个信号清出信号集
+               int sigismember(const sigset_t *set, int signum);判断某个信号是否在信号集
+               int sigprocmask(int how, const sigset_t *set, sigset_t *oldset);:设置阻塞或者解除阻塞信号集
+                     参数：how：SIG_BLOCK：设置阻塞   SIG_UNBLOCK：解除阻塞   SIG_SETMASK：设置set为新的阻塞信号集
+                           set：传入的信号集
+                           oldset：旧的信号集，传出
+               int sigpending(sigset_t *set);:获取未决信号集，，set，传出参数当前的未决信号集
+   * 信号捕捉
+      * typedef void (*sighandler_t)(int);       sighandler_t signal(int signum, sighandler_t handler);
+          * signum:要捕捉的信号    handler：要执行的捕捉函数指针，函数应该要声明 void func(int) 
+       * int sigaction(int signum, const struct sigaction *act,struct sigaction *oldact);
+         * signum:要捕捉的信号           act:要执行的程序       oldact:原动作
+         
+                 struct sigaction {
+                     void     (*sa_handler)(int);//函数指针
+                     void     (*sa_sigaction)(int, siginfo_t *, void *);//
+                     sigset_t   sa_mask; // 执行捕捉函数的期间，临时屏蔽的信号集
+                     int        sa_flags;//一般填0    0代表要执行第一个函数，，  sA_SIGNFO的执行第二个
+                     void     (*sa_restorer)(void);//无效
+                 };
+  * 信号捕捉特性：
+      * 1。进程正常运行的时候，默认PCB中有一个信号屏蔽字，当注册到某个信号捕捉函数时，捕捉到该信号时，调用该函数，这期间所屏蔽的信号由sa_mask指定，调用完函数后，再恢复默认屏蔽函数
+      * 2。xxx信号捕捉函数执行期间，xxx信号自动被屏蔽
+      * 3，阻塞的常规信号不支持排队，产生多次只记录一次   
+
+
 * 回收子进程
 * 守护进程
 * 线程
