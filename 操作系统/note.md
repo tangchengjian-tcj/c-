@@ -234,9 +234,36 @@
       * nohup cmd &
          * nohup指令会让cmd收不到SIGHUP信号
          * & 代表后台运行   
-
-* 守护进程
+        
 * 线程
+   * 简介 
+      *   线程是最小的执行单位   进程是最小的系统资源分配单位
+      *   内核都是通过clone实现的
+      *   ps -lf pid：查看指定线程的lwp号
+   *   线程共享资源
+      * 文件描述符
+      * 各种信号的处理方式
+      * 当前工作目录
+      * 用户id和组id
+      * 内存地址空间
+   * 线程非共享资源
+      * 线程id
+      * 处理器现场和栈指针（内核栈）
+      * 独立的栈空间
+      * errno变量   
+      * 信号屏蔽字
+      * 调度优先级    
+   * 创建一个线程
+      * #include <pthread.h> 
+      *  int pthread_create(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine) (void *), void *arg);
+      *  参数：
+         * thread：线程id  传出参数
+         * attr ：代表线程的属性
+         * 第三个参数 函数指针  viod *func(void *)
+         * arg:线程执行函数的参数
+         * 返回值 成功返回0    失败返回errno
+      * *编译的时候需要添加phtread库*
+         * *gcc create_thread.c -lpthread* 
 * 线程同步
 * 锁（互斥量）
 * 
