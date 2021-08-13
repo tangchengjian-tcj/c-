@@ -264,6 +264,26 @@
          * 返回值 成功返回0    失败返回errno
       * *编译的时候需要添加phtread库*
          * *gcc create_thread.c -lpthread* 
+      * pthread_self():返回当前线程号
+   * 线程的退出
+      * void pthread_exit(void *retval);
+      * 线程退出注意事项
+         * 在线程中使用pthread_exit
+         * 在线程中使用return（主控线程return 代表退出进程）
+         * exit代表退出整个进程  
+   * 线程的回收
+      *  int pthread_join(pthread_t thread, void **retval);
+      * 参数：
+         * thread创建的时候传出的第一个参数,线程id
+         * retval代表的传出的线程的退出信息   
+   * 线程的杀死
+      *   int pthread_cancel(pthread_t thread);
+      *     成功返回0，失败返回errno
+   * 线程的分离
+      * 简介
+         * 线程分离状态：指定该状态，线程主动与主控线程断开关系。线程结束后，其退出状态不由其他线程获取，而直接自己自动释放。网络、多线程服务器常用。  
+      * int pthread_detach(pthread_t thread);
+      * 此时不需要pthread_join进行回收资源
 * 线程同步
 * 锁（互斥量）
 * 
