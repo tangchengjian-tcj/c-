@@ -284,6 +284,41 @@
          * 线程分离状态：指定该状态，线程主动与主控线程断开关系。线程结束后，其退出状态不由其他线程获取，而直接自己自动释放。网络、多线程服务器常用。  
       * int pthread_detach(pthread_t thread);
       * 此时不需要pthread_join进行回收资源
-* 线程同步
-* 锁（互斥量）
-* 
+  * 线程同步
+      * 所谓同步就是同时起步，按照预定的先后次序运行
+      * 数据混乱原因
+        * 资源共享
+        * 调度随机
+        * 线程间缺乏必要的同步机制
+
+## 锁mutex（互斥量）
+  * pthread_mutex_init函数：初始化一个互斥锁
+     * int pthread_mutex_init (pthread_mutex_t *restrict mutex,const pthread_mutexattr_t *restrict attr)
+         * restrict:约束该块内存区域对应的数据，只能通过后面的变量进行访问和修改
+         * mutex ：锁
+         * attr:互斥量的属性，可以不考虑，传NULL
+   * int pthread_mutex_lock(pthread_mutex_t *mutex)：加锁（相当于将mutex--）
+      * mutex：init初始化的锁
+      * 如果当前为未锁的，成功，给线程加锁
+      * 如果已经加锁，阻塞等待
+   * int pthread_mutex_destroy (pthread_mutex_t *mutex)：销毁一个互斥锁
+      * mutex:传入的锁    
+   * pthread_mutex_unlock(pthread_mutex_t *mutex)：解锁
+   * pthread_mutex_trylock(pthread_mutex_t *mutex):尝试加锁
+      * 加锁失败直接返回错误号，不阻塞 
+   *  互斥量的使用步骤
+      * 1。初始化
+      * 2。加锁
+      * 3。执行逻辑--操作共享数据
+      * 4。解锁
+      * 注意事项
+         * 1。加锁需要最小力度，不要一直占用临界区       
+   * 死锁
+      * 线程试图对同一个互斥量A加锁两次
+      * 线程1拥有A锁，请求获得B锁，线程2拥有B锁，请求获得A锁
+## 读写锁（特性：写独享，读共享,写的优先级高）
+   * 一把读写锁具备三种状态
+      *  读模式下加锁状态（读锁）
+      *  写模式下加锁状态（写锁）
+      *  不加锁状态
+   *  
