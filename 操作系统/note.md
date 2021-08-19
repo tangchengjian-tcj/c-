@@ -321,4 +321,13 @@
       *  读模式下加锁状态（读锁）
       *  写模式下加锁状态（写锁）
       *  不加锁状态
-   *  
+   *  int pthread_rwlock_init (pthread_rwlock_t *restrict rwlock,const pthread_rwlockattr_t *restrict attr):初始化
+      * pthread_rwlock_t rwlock = PTHREAD_RWLOCK_INITIALIZER
+   * pthread_rwlock_destroy(pthread_rwlock_t *rwlock):销毁锁
+   * pthread_rwlock_wrlock (pthread_rwlock_t *rwlock):加写锁
+   * pthread_rwlock_rdlock(pthread_rwlock_t *rwlock):加读锁
+   * pthread_rwlock_unlock(pthread_rwlock_t *rwlock):解锁
+   * pthread_rwlock_tryrdlock(pthread_rwlock_t *rwlock):非阻塞以读写方式请求读写锁
+   * pthread_rwlock_trywrlock(pthread_rwlock_t *rwlock):非阻塞以写方式请求读写锁
+
+
