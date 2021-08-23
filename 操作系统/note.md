@@ -330,4 +330,6 @@
    * pthread_rwlock_tryrdlock(pthread_rwlock_t *rwlock):非阻塞以读写方式请求读写锁
    * pthread_rwlock_trywrlock(pthread_rwlock_t *rwlock):非阻塞以写方式请求读写锁
 
-
+* 条件变量
+   * pthread_cond_init函数   
+   
